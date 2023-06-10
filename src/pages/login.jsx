@@ -9,6 +9,7 @@ const Login = () => {
   const [userData, setUserData] = useState({ username: '', password: '' });
 
   const handleSignIn = async () => {
+    setLoading(true)
     login(userData).then(res => {
       const loggedUser = res.data;
       localStorage.setItem('token', loggedUser?.meta?.jwt)
