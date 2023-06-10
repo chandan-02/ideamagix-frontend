@@ -21,7 +21,12 @@ const Lecture = () => {
 
     const handleAdd = async () => {
         setLoadingLecture(true)
-        addLecture(lecture).then(rs => { setLecture({}); window.location.reload() }).catch(er => setLoadingLecture(false))
+        let data = {
+            instructor: lecture?.instructor?._id ?? lecture?.instructor,
+            course: lecture?.course?._id ?? lecture?.course,
+            date: lecture.date
+        }
+        addLecture(data).then(rs => { setLecture({}); window.location.reload() }).catch(er => setLoadingLecture(false))
     }
 
     const handleEdit = async () => {
@@ -31,6 +36,7 @@ const Lecture = () => {
             instructor: lecture?.instructor?._id ?? lecture?.instructor,
             date: lecture.date
         }
+        console.log(data)
         updateLecture({ query: id, data }).then(rs => { setLecture({}); window.location.reload() }).catch(er => setLoadingLecture(false))
     }
 
